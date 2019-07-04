@@ -84,8 +84,10 @@ class Details extends Component {
 
                         <br />
                         <div>
-                      
-                        {restaurantDetails.categories.map(category => <div className = "category-list">{category.category_name}, </div>)}
+                        
+                        {restaurantDetails.categories.map((category, index) => ( (index ? ', ': '') + category.category_name ))}
+          
+                        
                      </div>
 
                        

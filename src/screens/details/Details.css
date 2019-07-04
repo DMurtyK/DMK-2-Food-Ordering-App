@@ -93,3 +93,5 @@
   .category-list{
       display: inline;
   }
+
+  p { display: inline-block; }
