@@ -1,0 +1,95 @@
+.app-header-container {
+    background-color:darkgray;
+    
+    height: 36px;
+    padding: 8px 32px 8px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fastfood-icon-container {
+    float: left;
+    color:white;
+}
+
+.login-button-container {
+    float: right;
+}
+
+/*  account circle icon having a padding on right   */
+
+.accountCircle-logo {
+    padding-right: 6%;
+}
+
+/* for responsive webpage*/
+
+@media (max-width:600px) {
+    header {
+        flex-direction: column;
+        height: 100%;
+    }
+    .app-header-container {
+        background-color:darkgray;
+        height: 100%;
+    }
+    
+}
+
+/* A container for the details of the image*/
+.flex-containerDetails {
+    display: flex;
+    background-color:lightgrey;
+    height: 300px; 
+  }
+  
+  /* a container for the left image*/
+.leftDetails {
+    float: left;
+    width: 20%;
+    height: 250px; 
+  
+    align-self:center;
+    padding-left: 15px;
+    padding-right: 15px;
+   
+  }
+  .restaurant-img{
+    height: 100%;
+    width:100%;
+  }
+ 
+  /* a container for the right image text details*/
+  .rightDetails {
+   
+    float: right;
+    width: 80%;
+    padding-top: 45px;
+    padding-left: 35px;
+   
+  }
+  .locality-div{
+    padding-top: 4px;
+    font-size: medium;
+    font-weight:normal;
+  }
+ 
+  .fa-fa-star{
+    float: left;
+}
+  .average-rating{
+      color: darkgray;
+      font-size: 80%;
+  }
+  .fa-fa-inr{
+   padding-left: 35%;
+}
+  .average_price{
+    color: darkgray;
+    font-size: 80%;
+  }
+
+  /*category-list*/
+  .category-list{
+      display: inline;
+  }
