@@ -8,12 +8,32 @@ import Typography from '@material-ui/core/Typography';
 import 'font-awesome/css/font-awesome.min.css';
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
+import Divider from '@material-ui/core/Divider';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';
+import { red } from '@material-ui/core/colors';
+import { green } from '@material-ui/core/colors';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+
+
+const styles = theme => ({
+    
+     
 });
 
 
+
+
+
 class Details extends Component {
+   
 
     constructor() {
         super();
@@ -31,15 +51,16 @@ class Details extends Component {
     //     this.setState({ currentState });
     //     console.log(this.state);
     // }
+    
+    
 
     render() {
-
+        const classes = styles();
         //let restaurantDetails = this.state.restaurant;
 
 
 
-
-
+       
 
         return (
 
@@ -111,13 +132,68 @@ class Details extends Component {
 
                     </div>
 
+                    
+
+                </div>
+
+                <br />
+                <div className = "bottomContainerDetails">
+
+                     <div className="bottomleft-category-Details">
+                    
+                         <div>
+                         {restaurantDetails.categories.map((category, index) => (
+                       
+                        
+                             <List className= "list-category-name" key = {category.id}>
+                             <ListItem>
+                             <ListItemText primary={category.category_name} className="list-category-name" />
+                             </ListItem>
+                             <Divider />
+                             {
+                                category.item_list.map((subitem, i) => {
+                                  return (
+                                   
+                                <ul  key = {subitem.id}>
+                                    <div className="item-row">
+                                        <div className="item-row-left">
+                                           <i class="fa fa-circle" color={subitem.item_type=="VEG" ? red : green } id="facircle" aria-hidden="true"></i>{subitem.item_name} 
+                                        </div>
+
+                                        <div className="item-row-right">
+                                           <i class="fa fa-inr" id = "fainr" aria-hidden="true" ></i>{subitem.price}
+                                           <AddIcon className="add-icon"  />
+                                           
+                                        </div>
+                                    </div>
+
+                                </ul>
+                                    
+                                  )
+                                })
+                               }
+                         
+                            </List>
+                        
+                        
+                           ))}
+                     
+                    
+                        </div>
+                    
+                     </div>
+
+                     <div className="bottomright-cart-Details">
+                    
+                    
+                    
+                     </div>
 
 
+                </div>
 
-
-                 </div>
                   
-                 </div>
+            </div>
                     );
                 }
             }

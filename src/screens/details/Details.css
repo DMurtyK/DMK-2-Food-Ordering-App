@@ -94,4 +94,40 @@
       display: inline;
   }
 
-  p { display: inline-block; }
+  .bottomleft-category-Details{
+      width: 40%;
+      border: 0;
+      padding: 25px;
+  }
+ 
+.list-category-name{
+    text-transform: uppercase;
+}
+
+  
+  .item-row{
+      
+      text-transform: lowercase;
+  padding: 8px;
+     
+     
+  }
+  
+  .item-row-right{
+float:right;
+padding-top:0;
+  }
+  .add-icon{
+     
+     padding-left: 20px;
+      color: gray;
+  }
+  #facircle{
+      
+      padding-right: 8px;
+  }
+  #fainr{
+    padding-right: 8px;
+   
+  }
+ 
