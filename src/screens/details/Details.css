@@ -93,6 +93,11 @@
   .category-list{
       display: inline;
   }
+  .bottomContainerDetails{
+      display:flex;
+      flex-direction: row;
+      
+  }
 
   .bottomleft-category-Details{
       width: 40%;
@@ -130,4 +135,34 @@ padding-top:0;
     padding-right: 8px;
    
   }
+
+  .bottomright-cart-Details{
+      float:right;
+      padding-left: 10%;
+      padding-top: 2%;
+      width:40%;
+      border: 5px;
+  }
+  .my-cart-header{
+    font-weight: bolder;
+    padding-left: 3%;
+
+  }
+  .total-amount{
+      font-weight: medium;
+  }
+  #rupee{
+     float:right;
+  }
  
+ button{
+     color:white;
+     
+     width:100%;
+     cursor: pointer;
+     text-align: center;
+     background-color: blue;
+     border: none;
+     padding: 15px 32px;
+     margin:10px;
+ }

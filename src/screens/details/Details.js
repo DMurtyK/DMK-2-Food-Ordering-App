@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
 import './Details.css';
 import accountCircle from '../../assets/accountCircle.svg';
+
 import FastFoodIcon from '@material-ui/icons/Fastfood';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button';
 import restaurantDetails from '../../common/restaurantDetails';
 import Typography from '@material-ui/core/Typography';
 import 'font-awesome/css/font-awesome.min.css';
 import { withStyles } from "@material-ui/core/styles";
 
-import ListSubheader from '@material-ui/core/ListSubheader';
+//import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+//import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Divider from '@material-ui/core/Divider';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
+//import Icon from '@material-ui/core/Icon';
 import { red } from '@material-ui/core/colors';
 import { green } from '@material-ui/core/colors';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+//import Snackbar from '@material-ui/core/Snackbar';
+//import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Card from '@material-ui/core/Card';
+import Badge from '@material-ui/core/Badge';
+//import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+//import Button from '@material-ui/core/Button';
+                                                                    
 
 
 const styles = theme => ({
-    
+     title: {
+    fontSize: 14,
+  },
+  
      
 });
+
 
 
 
@@ -41,7 +53,7 @@ class Details extends Component {
             restaurant: {}
         }
     }
-
+    
 
     // componentDidMount() {
     //     let currentState = this.state;
@@ -51,15 +63,20 @@ class Details extends Component {
     //     this.setState({ currentState });
     //     console.log(this.state);
     // }
-    
+    camelize = function camelize(str) {
+        return str.replace(/\W+(.)/g, function(match, chr)
+         {
+              return chr.toUpperCase();
+          });
+      }
+
     
 
     render() {
         const classes = styles();
         //let restaurantDetails = this.state.restaurant;
 
-
-
+        
        
 
         return (
@@ -157,7 +174,7 @@ class Details extends Component {
                                 <ul  key = {subitem.id}>
                                     <div className="item-row">
                                         <div className="item-row-left">
-                                           <i class="fa fa-circle" color={subitem.item_type=="VEG" ? red : green } id="facircle" aria-hidden="true"></i>{subitem.item_name} 
+                                           <i class="fa fa-circle" color={subitem.item_type =="VEG" ? red : green } id="facircle" aria-hidden="true"></i>{subitem.item_name} 
                                         </div>
 
                                         <div className="item-row-right">
@@ -184,6 +201,33 @@ class Details extends Component {
                      </div>
 
                      <div className="bottomright-cart-Details">
+
+                     <Card className={classes.card}>
+                        <CardContent>
+
+                        <div>
+                        <Badge  className = "badge" badgeContent={4} color="primary">
+                            <ShoppingCart />
+                            </Badge>
+                            <span  className = "my-cart-header">My Cart</span>
+                         </div>
+                         <div>
+                         <span className="total-amount">TOTAL AMOUNT</span>
+                         
+                         <i id = "rupee" class="fa fa-inr"  aria-hidden="true" ></i>
+                         </div>
+                         <button>CHECKOUT</button>
+                         
+                         
+                        
+                        
+                        
+                        
+
+                        </CardContent>
+                       
+
+                     </Card>
                     
                     
                     
