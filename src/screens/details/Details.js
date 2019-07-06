@@ -59,24 +59,25 @@ class Details extends Component {
                 "id": "",
                  "restaurant_name": "",
                 "photo_URL": "",
-             "customer_rating": "",
-            "average_price": "",
-            "number_customers_rated": "",
-            "address": {
-                "id": "",
-                "flat_building_name": "",
-                "locality": "",
-                "city": "",
-                "pincode": "",
-                "state": {
-                    "id": "",
-                    "state_name": ""
-                }
+                "customer_rating": "",
+               "average_price": "",
+               "number_customers_rated": "",
+               "address": {
+                   "id": "",
+                   "flat_building_name": "",
+                   "locality": "",
+                   "city": "",
+                   "pincode": "",
+                   "state": {
+                       "id": "",
+                       "state_name": ""
+                    }
 
-            },
-            "categories": []
-        }
+                },
+               "categories":[],
+
             }
+        }
         
     }
     
@@ -87,23 +88,54 @@ class Details extends Component {
         this.setState({ AddSnackBarIsOpen: true });
 
     }
-    componentDidMount() {
-        // let currentState = this.state;
-        // currentState.restaurant = restaurantDetails.filter((res) => {
-        //     return res.id === "5485eb18-a23b-11e8-9077-720006ceb890"
-        // })[0];
-        // this.setState({ currentState });
-        // console.log(this.state);
-       // this.getAllRestaurantData();
+    componentWillMount() {
+    //      let currentState = this.state;
+    //      currentState.restaurant = restaurantDetails.filter((res) => {
+    //         //return res.id === "5485eb18-a23b-11e8-9077-720006ceb890"
+    //            return res.id === this.props.restaurantId;
+    //      })[0];
+    //      this.setState({ currentState });
+    //  console.log(this.state);
+    //    // this.getAllRestaurantData();
+    
     this.getRestaurantByRestaurantId();
   
     }
     
+    getRestaurantByRestaurantId = () => {
 
+        let dataLogin = null;
+       let xhrLogin = new XMLHttpRequest();
+       let that = this;
+      // let restaurantId = this.props.restaurantId;
+      let restaurantId = "5485eb18-a23b-11e8-9077-720006ceb890";
+       xhrLogin.addEventListener("readystatechange", function () {
+           if (this.readyState === 4) {
+               if (xhrLogin.status === 200 || xhrLogin.status === 201){
+ 
+ 
+ 
+                that.setState({
+                 restaurantDataById: JSON.parse(this.responseText)
+ 
+                });             
+            }
+        }
+        });	    
+      
+ 
+        xhrLogin.open("GET", "http://localhost:8080/api/restaurant/"+restaurantId);
+ 
+        xhrLogin.setRequestHeader("Content-Type", "application/json");
+       xhrLogin.setRequestHeader("Cache-Control", "no-cache");
+       xhrLogin.send(dataLogin);
+ 
+ 
+        }
     
 
 
-
+/*
  
 
     getRestaurantByRestaurantId = () => {
@@ -111,34 +143,34 @@ class Details extends Component {
       let dataLogin = null;
       let xhrLogin = new XMLHttpRequest();
       let that = this;
+    
+      //let id=this.props.match.params.id;
       xhrLogin.addEventListener("readystatechange", function () {
-          if (this.readyState === 4) {
-              if (xhrLogin.status === 200 || xhrLogin.status === 201){
-              
-             
-
+          if (this.readyState === 4) 
+          {
               that.setState({
                 restaurantDataById: JSON.parse(this.responseText)
-                  
-              });             
-          }
-      }
-      });
-
+            });
+        }
+    });
       xhrLogin.open("GET", "http://localhost:8080/api/restaurant/5485eb18-a23b-11e8-9077-720006ceb890");
+     
+     //xhr.open("GET", this.props.baseUrl + "/restaurant/"+ id);
+     //xhrLogin.open("GET", "http://localhost:8080/api" + "/restaurant/"+ id);
      
       xhrLogin.setRequestHeader("Content-Type", "application/json");
       xhrLogin.setRequestHeader("Cache-Control", "no-cache");
       xhrLogin.send(dataLogin);
 
          
-      };
-
-    
+      }
+  
+    */
 
     render() {
         const classes = styles();
         //let restaurantDetails = this.state.restaurant;
+     
 
         
        
@@ -238,12 +270,14 @@ class Details extends Component {
                                 <ul  key = {subitem.id}>
                                     <div className="item-row">
                                         <div className="item-row-left">
-                                           <i class="fa fa-circle" color={subitem.item_type =="VEG" ? red : green } id="facircle" aria-hidden="true"></i>{subitem.item_name} 
+                                           <i class="fa fa-circle"    id="facircle" aria-hidden="true" style={{color : subitem.item_type =="VEG" ? "green" : "red" }}></i>{subitem.item_name} 
                                         </div>
 
                                         <div className="item-row-right">
-                                           <i class="fa fa-inr" id = "fainr" aria-hidden="true" ></i>{subitem.price}
-                                           <AddIcon className="add-icon" onClick={this.AddItemHandler} />
+                                        
+                                          <i class="fa fa-inr" id = "fainr"  aria-hidden="true" ></i>{subitem.price}
+                                         
+                                          <AddIcon className="add-icon" onClick={this.AddItemHandler} />
                                            
                                         </div>
                                     </div>
