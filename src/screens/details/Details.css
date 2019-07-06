@@ -152,9 +152,10 @@ padding-top:0;
       font-weight: medium;
   }
   #rupee{
-     float:right;
+    
+     padding-left: 73%;
   }
- 
+
  button{
      color:white;
      
@@ -165,4 +166,30 @@ padding-top:0;
      border: none;
      padding: 15px 32px;
      margin:10px;
+ }
+
+ .cart-item-name{
+     color:grey;
+     padding-left: 15%;
+ }
+ .item-cart-row{
+    display:flex;
+    flex-direction: row;
+    color: gray;
+     
+ }
+ .cart-quantity{
+     padding-left: 10%;
+     display:flex;
+    flex-direction: row;
+ }
+ #inr-cart-row{
+padding: 5px;
+ }
+ .quantity-item-amount{
+    padding-left: 43%;
+ }
+ .final-amount{
+     padding:5px;
+     color: black;
  }

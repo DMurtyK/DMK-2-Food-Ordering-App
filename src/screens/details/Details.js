@@ -3,6 +3,8 @@ import './Details.css';
 import accountCircle from '../../assets/accountCircle.svg';
 
 import FastFoodIcon from '@material-ui/icons/Fastfood';
+import Remove from '@material-ui/icons/Remove';
+import Add from '@material-ui/icons/Add'
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button';
 import restaurantDetails from '../../common/restaurantDetails';
@@ -31,6 +33,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { typography } from '@material-ui/system';
                                                                     
 
 
@@ -49,10 +52,11 @@ const styles = theme => ({
 
 class Details extends Component {
    
-
-    constructor() {
-        super();
+    
+    constructor(props) {
+        super(props);
         this.state = {
+            qty: 0,
             restaurant: {},
             restaurantDataById:{
 
@@ -78,6 +82,9 @@ class Details extends Component {
 
             }
         }
+        this.add = this.add.bind(this);
+        this.subtract = this.subtract.bind(this);
+       
         
     }
     
@@ -166,7 +173,26 @@ class Details extends Component {
       }
   
     */
+   add() {
+    this.setState({
+      qty: this.state.qty + 1
+    });
+   
+  }
 
+  subtract() {
+   let quantity =  this.state.qty;
+   if(quantity > 0){
+    this.setState({
+       
+            qty: this.state.qty - 1
+        
+        
+     
+    });
+}
+    
+  }
     render() {
         const classes = styles();
         //let restaurantDetails = this.state.restaurant;
@@ -304,12 +330,32 @@ class Details extends Component {
                         <CardContent>
 
                         <div>
-                        <Badge  className = "badge" badgeContent={4} color="primary">
+                            <Badge  className = "badge" badgeContent={4} color="primary">
                             <ShoppingCart />
                             </Badge>
                             <span  className = "my-cart-header">My Cart</span>
                          </div>
-                         <div>
+                         <br />
+                         <div className = "item-cart-row">
+                            <i class="far fa-stop-circle" aria-hidden="true" ></i>
+                        
+                            <span className = "cart-item-name">item name1</span>
+
+                            <div className="cart-quantity">
+                         
+                              <Remove onClick={this.subtract}></Remove>
+                              <span>{this.state.qty}</span>
+                               <Add onClick={this.add}></Add>
+                     
+                            </div>
+                         
+                            <div className= "quantity-item-amount">
+                            <i id = "rupee" class="fa fa-inr"  aria-hidden="true" id = "inr-cart-row"></i>
+                            </div>
+                           
+                            <br />
+                        </div>
+                         <div className = "final-amount">
                          <span className="total-amount">TOTAL AMOUNT</span>
                          
                          <i id = "rupee" class="fa fa-inr"  aria-hidden="true" ></i>
