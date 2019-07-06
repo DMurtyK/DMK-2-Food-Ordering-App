@@ -57,6 +57,14 @@ class Details extends Component {
         super(props);
         this.state = {
             qty: 0,
+            cartItemName:"",
+            cartItemPrice:"",
+            cart : [
+                {
+                    "item-name":"",
+                    "item-price":""
+                }
+            ],
             restaurant: {},
             restaurantDataById:{
 
@@ -84,6 +92,7 @@ class Details extends Component {
         }
         this.add = this.add.bind(this);
         this.subtract = this.subtract.bind(this);
+        this.AddItemToCartHandler = this.AddItemToCartHandler.bind(this);
        
         
     }
@@ -91,8 +100,15 @@ class Details extends Component {
     AddSnackBarCloseHandler = () => {
         this.setState({ AddSnackBarIsOpen: false });
     }
-    AddItemHandler = () => {
+    AddItemToCartHandler = (name,price) => {
+        let cartList = [];
         this.setState({ AddSnackBarIsOpen: true });
+       this.setState({cartItemName:name});
+       this.setState({cartItemPrice:price});
+       cartList.push(name,price);
+       this.setState({cart: cartList});
+      console.log(cartList);
+
 
     }
     componentWillMount() {
@@ -291,7 +307,7 @@ class Details extends Component {
                              <Divider />
                              {
                                 category.item_list.map((subitem, i) => {
-                                  return (
+                     return (
                                    
                                 <ul  key = {subitem.id}>
                                     <div className="item-row">
@@ -303,14 +319,14 @@ class Details extends Component {
                                         
                                           <i class="fa fa-inr" id = "fainr"  aria-hidden="true" ></i>{subitem.price}
                                          
-                                          <AddIcon className="add-icon" onClick={this.AddItemHandler} />
+                                          <AddIcon className="add-icon" onClick={() =>this.AddItemToCartHandler(subitem.item_name,subitem.price)}  />
                                            
                                         </div>
                                     </div>
 
                                 </ul>
                                     
-                                  )
+                            )
                                 })
                                }
                          
@@ -326,7 +342,7 @@ class Details extends Component {
 
                      <div className="bottomright-cart-Details">
 
-                     <Card className={classes.card}>
+                     <Card >
                         <CardContent>
 
                         <div>
@@ -339,7 +355,7 @@ class Details extends Component {
                          <div className = "item-cart-row">
                             <i class="far fa-stop-circle" aria-hidden="true" ></i>
                         
-                            <span className = "cart-item-name">item name1</span>
+                            <span className = "cart-item-name">{this.state.cartItemName}</span>
 
                             <div className="cart-quantity">
                          
@@ -351,6 +367,7 @@ class Details extends Component {
                          
                             <div className= "quantity-item-amount">
                             <i id = "rupee" class="fa fa-inr"  aria-hidden="true" id = "inr-cart-row"></i>
+                            <span className = "cart-item-price">{this.state.cartItemPrice}</span>
                             </div>
                            
                             <br />

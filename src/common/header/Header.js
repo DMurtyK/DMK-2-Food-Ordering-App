@@ -96,8 +96,8 @@ const styles = theme => ({
 
 class Header extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             modalIsOpen: false,
             value: 0,
@@ -244,6 +244,7 @@ class Header extends Component {
 
     //a handler for the details page to be shown when a gridtile restaurant is clicked
     restaurantClickHandler  = (restaurantId) => {
+       // this.props.history.push('/restaurant/' + restaurantId);
         ReactDOM.render(<Details id = {restaurantId} />,document.getElementById('root'));
     }
 

@@ -170,7 +170,7 @@ padding-top:0;
 
  .cart-item-name{
      color:grey;
-     padding-left: 15%;
+     padding-left: 10%;
  }
  .item-cart-row{
     display:flex;
@@ -194,3 +194,15 @@ padding: 5px;
      padding:5px;
      color: black;
  }
+
+.card-style{
+ display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+ .DcardStyle {
+    width: 60%;
+    padding: 22px 54px 22px 54px;
+    margin: auto;
+    text-align: left;
+}
