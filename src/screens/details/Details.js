@@ -356,14 +356,14 @@ class Details extends Component {
 
                      <div className="bottomright-cart-Details">
 
-                     <Card >
+                     <Card className="card-cart">
                         <CardContent>
 
-                        <div>
+                        <div  className = "my-cart-header">
                             <Badge  className = "badge" badgeContent={4} color="primary">
                             <ShoppingCart />
                             </Badge>
-                            <span  className = "my-cart-header">My Cart</span>
+                            <Typography variant="headline" component="h3" className="mycart">My Cart</Typography>
                          </div>
                          <br />
 
@@ -372,14 +372,14 @@ class Details extends Component {
                                 return (
                            <div className = "item-cart-row" key={rowdata.id}>
                          
-                            <i class="far fa-stop-circle" aria-hidden="true" style={{color : rowdata.itemType =="VEG" ? "green" : "red" }}></i>
+                           <i class="fa fa-stop-circle-o fa-lg"  aria-hidden="true"  style={{color : rowdata.itemType =="VEG" ? "green" : "red" }}></i>
                         
                             <span className = "cart-item-name">{rowdata.item}</span>
 
                             <div className="cart-quantity">
                          
                               <Remove onClick={this.subtract}></Remove>
-                              <span>{this.state.qty}</span>
+                              {this.state.qty}
                                <Add onClick={this.add}></Add>
                      
                             </div>
@@ -399,7 +399,7 @@ class Details extends Component {
                          
                          <i id = "rupee" class="fa fa-inr"  aria-hidden="true" ></i>
                          </div>
-                         <button>CHECKOUT</button>
+                         <Button className="checkout-button" variant="contained" color="primary" >CHECKOUT</Button>
                          
                          
                         
