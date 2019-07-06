@@ -182,6 +182,7 @@ padding-top:0;
      padding-left: 10%;
      display:flex;
     flex-direction: row;
+    color: black;
  }
  #inr-cart-row{
 padding: 5px;
