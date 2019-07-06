@@ -28,6 +28,9 @@ import Badge from '@material-ui/core/Badge';
 //import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 //import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
                                                                     
 
 
@@ -50,25 +53,86 @@ class Details extends Component {
     constructor() {
         super();
         this.state = {
-            restaurant: {}
+            restaurant: {},
+            restaurantDataById:{
+
+                "id": "",
+                 "restaurant_name": "",
+                "photo_URL": "",
+             "customer_rating": "",
+            "average_price": "",
+            "number_customers_rated": "",
+            "address": {
+                "id": "",
+                "flat_building_name": "",
+                "locality": "",
+                "city": "",
+                "pincode": "",
+                "state": {
+                    "id": "",
+                    "state_name": ""
+                }
+
+            },
+            "categories": []
         }
+            }
+        
+    }
+    
+    AddSnackBarCloseHandler = () => {
+        this.setState({ AddSnackBarIsOpen: false });
+    }
+    AddItemHandler = () => {
+        this.setState({ AddSnackBarIsOpen: true });
+
+    }
+    componentDidMount() {
+        // let currentState = this.state;
+        // currentState.restaurant = restaurantDetails.filter((res) => {
+        //     return res.id === "5485eb18-a23b-11e8-9077-720006ceb890"
+        // })[0];
+        // this.setState({ currentState });
+        // console.log(this.state);
+       // this.getAllRestaurantData();
+    this.getRestaurantByRestaurantId();
+  
     }
     
 
-    // componentDidMount() {
-    //     let currentState = this.state;
-    //     currentState.restaurant = restaurantDetails.filter((res) => {
-    //         return res.id === "5485eb18-a23b-11e8-9077-720006ceb890"
-    //     })[0];
-    //     this.setState({ currentState });
-    //     console.log(this.state);
-    // }
-    camelize = function camelize(str) {
-        return str.replace(/\W+(.)/g, function(match, chr)
-         {
-              return chr.toUpperCase();
-          });
+    
+
+
+
+ 
+
+    getRestaurantByRestaurantId = () => {
+
+      let dataLogin = null;
+      let xhrLogin = new XMLHttpRequest();
+      let that = this;
+      xhrLogin.addEventListener("readystatechange", function () {
+          if (this.readyState === 4) {
+              if (xhrLogin.status === 200 || xhrLogin.status === 201){
+              
+             
+
+              that.setState({
+                restaurantDataById: JSON.parse(this.responseText)
+                  
+              });             
+          }
       }
+      });
+
+      xhrLogin.open("GET", "http://localhost:8080/api/restaurant/5485eb18-a23b-11e8-9077-720006ceb890");
+     
+      xhrLogin.setRequestHeader("Content-Type", "application/json");
+      xhrLogin.setRequestHeader("Cache-Control", "no-cache");
+      xhrLogin.send(dataLogin);
+
+         
+      };
 
     
 
@@ -105,17 +169,17 @@ class Details extends Component {
                 <div className="flex-containerDetails">
 
                     <div className="leftDetails">
-                        <img className="restaurant-img" src={restaurantDetails.photo_URL} />
+                        <img className="restaurant-img" src={this.state.restaurantDataById.photo_URL} />
 
                     </div>
 
                     <div className="rightDetails">
                         <div>
-                            <Typography variant="headline" component="h3">{restaurantDetails.restaurant_name}</Typography>
+                            <Typography variant="headline" component="h3">{this.state.restaurantDataById.restaurant_name}</Typography>
                         </div>
 
                         <div className="locality-div">
-                            {restaurantDetails.address.locality}
+                            {this.state.restaurantDataById.address.locality}
 
                         </div>
 
@@ -123,7 +187,7 @@ class Details extends Component {
                         <br />
                         <div>
                         
-                        {restaurantDetails.categories.map((category, index) => ( (index ? ', ': '') + category.category_name ))}
+                        {this.state.restaurantDataById.categories.map((category, index) => ( (index ? ', ': '') + category.category_name ))}
           
                         
                      </div>
@@ -134,12 +198,12 @@ class Details extends Component {
                         <div className="fa-icon">
 
                             <div className="fa-fa-star">
-                                <i class="fa fa-star" aria-hidden="true"></i>{restaurantDetails.customer_rating}
-                                <div className="average-rating">AVERAGE RATING BY <br />{restaurantDetails.number_customers_rated} CUSTOMERS</div>
+                                <i class="fa fa-star" aria-hidden="true"></i>{this.state.restaurantDataById.customer_rating}
+                                <div className="average-rating">AVERAGE RATING BY <br />{this.state.restaurantDataById.number_customers_rated} CUSTOMERS</div>
                             </div>
 
                             <div className="fa-fa-inr">
-                                <i class="fa fa-inr" aria-hidden="true"></i>{restaurantDetails.average_price}
+                                <i class="fa fa-inr" aria-hidden="true"></i>{this.state.restaurantDataById.average_price}
 
                                 <div className="average_price">AVERAGE COST FOR<br /> TWO PEOPLE</div>
 
@@ -159,7 +223,7 @@ class Details extends Component {
                      <div className="bottomleft-category-Details">
                     
                          <div>
-                         {restaurantDetails.categories.map((category, index) => (
+                         {this.state.restaurantDataById.categories.map((category, index) => (
                        
                         
                              <List className= "list-category-name" key = {category.id}>
@@ -179,7 +243,7 @@ class Details extends Component {
 
                                         <div className="item-row-right">
                                            <i class="fa fa-inr" id = "fainr" aria-hidden="true" ></i>{subitem.price}
-                                           <AddIcon className="add-icon"  />
+                                           <AddIcon className="add-icon" onClick={this.AddItemHandler} />
                                            
                                         </div>
                                     </div>
@@ -235,6 +299,24 @@ class Details extends Component {
 
 
                 </div>
+                <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }}
+                className="snackbar"
+                open={this.state.AddSnackBarIsOpen}
+                onClose={this.AddSnackBarCloseHandler}
+                ContentProps={{ 'aria-describedby': 'message-id', }}
+                message={<span id="message-id">Item added to cart!</span>}
+                action={[
+                    <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        onClick={this.AddSnackBarCloseHandler}
+                    >
+                        <CloseIcon />
+                    </IconButton>,
+                ]}
+               />
 
                   
             </div>
