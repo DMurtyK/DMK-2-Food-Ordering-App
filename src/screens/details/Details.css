@@ -140,7 +140,7 @@ padding-top:0;
       float:right;
       padding-left: 10%;
       padding-top: 2%;
-      width:40%;
+      width:50%;
       border: 5px;
   }
   .my-cart-header{
@@ -175,7 +175,7 @@ padding-top:0;
  .item-cart-row{
     display:flex;
     flex-direction: row;
-    color: gray;
+    
      
  }
  .cart-quantity{
@@ -185,7 +185,7 @@ padding-top:0;
     color: black;
  }
  #inr-cart-row{
-padding: 5px;
+padding: 2px;
  }
  .quantity-item-amount{
     padding-left: 43%;

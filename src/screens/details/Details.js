@@ -57,14 +57,9 @@ class Details extends Component {
         super(props);
         this.state = {
             qty: 0,
-            cartItemName:"",
-            cartItemPrice:"",
-            cart : [
-                {
-                    "item-name":"",
-                    "item-price":""
-                }
-            ],
+           
+            buyItems :[],
+            object : {},
             restaurant: {},
             restaurantDataById:{
 
@@ -100,17 +95,35 @@ class Details extends Component {
     AddSnackBarCloseHandler = () => {
         this.setState({ AddSnackBarIsOpen: false });
     }
-    AddItemToCartHandler = (name,price) => {
-        let cartList = [];
-        this.setState({ AddSnackBarIsOpen: true });
-       this.setState({cartItemName:name});
-       this.setState({cartItemPrice:price});
-       cartList.push(name,price);
-       this.setState({cart: cartList});
-      console.log(cartList);
+    // AddItemToCartHandler = (name,price) => {
+    //     let cartList = [];
+    //     this.setState({ AddSnackBarIsOpen: true });
+    //    this.setState({cartItemName:name});
+    //    this.setState({cartItemPrice:price});
+    //    cartList.push(name,price);
+    //    this.setState({cart: cartList});
+    //   console.log(cartList);
 
 
-    }
+    // }
+
+    AddItemToCartHandler = (subitem) => {
+            
+            this.setState({ AddSnackBarIsOpen: true });
+            
+           
+    
+           const cartItemName = subitem.item_name;
+           const cartItemPrice = subitem.price;
+           const cartItemType = subitem.item_type;
+           const cartItemId = subitem.id;
+           const obj = {'id':cartItemId,'item':cartItemName, 'price':cartItemPrice, 'itemType':cartItemType};
+           this.setState({
+               buyItems: [...this.state.buyItems, obj]
+           });
+           console.log(obj);
+         }
+
     componentWillMount() {
     //      let currentState = this.state;
     //      currentState.restaurant = restaurantDetails.filter((res) => {
@@ -211,6 +224,7 @@ class Details extends Component {
   }
     render() {
         const classes = styles();
+        const {buyItems,message} = this.state;
         //let restaurantDetails = this.state.restaurant;
      
 
@@ -319,7 +333,7 @@ class Details extends Component {
                                         
                                           <i class="fa fa-inr" id = "fainr"  aria-hidden="true" ></i>{subitem.price}
                                          
-                                          <AddIcon className="add-icon" onClick={() =>this.AddItemToCartHandler(subitem.item_name,subitem.price)}  />
+                                          <AddIcon className="add-icon" onClick={() =>this.AddItemToCartHandler(subitem)}  />
                                            
                                         </div>
                                     </div>
@@ -352,10 +366,15 @@ class Details extends Component {
                             <span  className = "my-cart-header">My Cart</span>
                          </div>
                          <br />
-                         <div className = "item-cart-row">
-                            <i class="far fa-stop-circle" aria-hidden="true" ></i>
+
+                         {
+                            buyItems.map((rowdata,i) => { 
+                                return (
+                           <div className = "item-cart-row" key={rowdata.id}>
+                         
+                            <i class="far fa-stop-circle" aria-hidden="true" style={{color : rowdata.itemType =="VEG" ? "green" : "red" }}></i>
                         
-                            <span className = "cart-item-name">{this.state.cartItemName}</span>
+                            <span className = "cart-item-name">{rowdata.item}</span>
 
                             <div className="cart-quantity">
                          
@@ -367,11 +386,14 @@ class Details extends Component {
                          
                             <div className= "quantity-item-amount">
                             <i id = "rupee" class="fa fa-inr"  aria-hidden="true" id = "inr-cart-row"></i>
-                            <span className = "cart-item-price">{this.state.cartItemPrice}</span>
+                            <span className = "cart-item-price">{rowdata.price}</span>
                             </div>
                            
                             <br />
                         </div>
+                                )
+                    })
+                }
                          <div className = "final-amount">
                          <span className="total-amount">TOTAL AMOUNT</span>
                          
